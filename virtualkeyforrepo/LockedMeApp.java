@@ -1,5 +1,6 @@
 package virtualkeyforrepo;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LockedMeApp {
@@ -18,7 +19,6 @@ public class LockedMeApp {
 	
 	static String get() {
 		
-		Scanner input = new Scanner(System.in);
 		System.out.println("Enter File Name.");
 		String name = input.next();
 		return name;
@@ -31,7 +31,16 @@ public class LockedMeApp {
 			
 			displayMenu(obj);
 			System.out.println("Enter you choice: ");
-			choice = input.nextInt();
+			
+			try {
+				choice = input.nextInt();
+			}
+			catch(InputMismatchException ime){
+				ime.getMessage();
+				System.out.println("Please enter correct number.");
+				choice = 6;
+				continue;
+			}
 			
 			switch(choice) {
 				
@@ -55,7 +64,12 @@ public class LockedMeApp {
 				System.out.println("Thank you!");
 				break;	
 			
-			}	
+			}
+			
+			if(choice < 0 || choice > 4) {
+				System.out.println("Please Enter Correct Choice from menue.");
+				continue;
+			}
 		}	
 	}
 
